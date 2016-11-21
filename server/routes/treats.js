@@ -3,7 +3,8 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = "postgres://localhost:5432/sigma";
 
-router.get('/', function (req, res) {
+router.get('/:name', function (req, res) {
+  var nameSearch = req.params.name;
   console.log('GET request');
 
   pg.connect(connectionString, function (err, client, done) {
@@ -12,7 +13,9 @@ router.get('/', function (req, res) {
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM treats', function (err, result) {
+    client.query('SELECT * FROM treats WHERE name = $1'
+    [nameSearch],
+    function (err, result) {
       done();
 
       if (err) {
