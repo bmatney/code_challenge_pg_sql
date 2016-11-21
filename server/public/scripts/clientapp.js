@@ -12,7 +12,7 @@ $(document).ready(function () {
     searchTreats(queryString);
   });
 
-  $('#saveNewButton').on('click', function(event) {
+  $('#saveNewButton').on('click', function (event) {
     event.preventDefault();
 
     var treateName = $('#treatNameInput').val();
@@ -22,7 +22,7 @@ $(document).ready(function () {
     var newTreat = {
       name: treateName,
       description: treatDescription,
-      url: treateURL
+      url: treateURL,
     };
 
     postTreat(newTreat);
